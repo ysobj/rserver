@@ -23,6 +23,9 @@ app.use('/api', comments);
 
 io.on('connection',function(socket){
   console.log('user connected');
+  socket.on('chat message', function(message){
+    console.log('message: ' + message);
+  });
 });
 http.listen(PORT_NUMBER, function(){
   console.log("Exaple app is listening at port number %s", PORT_NUMBER);
