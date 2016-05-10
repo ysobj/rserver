@@ -10,6 +10,8 @@ var errorHandler = require('errorhandler');
 var comments = require('./routes/comments');
 
 var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.use(logger('dev'));
 app.use(responseTime());
@@ -19,6 +21,9 @@ app.use(express.static('public'));
 app.use(errorHandler());
 app.use('/api', comments);
 
-app.listen(PORT_NUMBER, function(){
+io.on('connection',function(socket){
+  console.log('user connected');
+});
+http.listen(PORT_NUMBER, function(){
   console.log("Exaple app is listening at port number %s", PORT_NUMBER);
 });

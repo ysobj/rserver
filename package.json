@@ -16,6 +16,7 @@
     "mongo": "^0.1.0",
     "mongodb": "^2.1.16",
     "morgan": "^1.7.0",
-    "response-time": "^2.3.1"
+    "response-time": "^2.3.1",
+    "socket.io": "^1.4.6"
   }
 }
