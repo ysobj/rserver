@@ -8,6 +8,7 @@ var responseTime = require('response-time');
 var bodyParser = require('body-parser');
 var errorHandler = require('errorhandler');
 var comments = require('./routes/comments');
+var comments2 = require('./routes/comments2');
 
 var app = express();
 var http = require('http').Server(app);
@@ -25,6 +26,7 @@ io.on('connection',function(socket){
   console.log('user connected');
   socket.on('chat message', function(message){
     console.log('message: ' + message);
+    comments2.insert({contents: message});
   });
 });
 http.listen(PORT_NUMBER, function(){
