@@ -22,11 +22,17 @@ app.use(express.static('public'));
 app.use(errorHandler());
 app.use('/api', comments);
 
+var sockets = [];
+
 io.on('connection',function(socket){
+  sockets.push(socket);
   console.log('user connected');
-  socket.on('chat message', function(message){
+  socket.on('message', function(message){
     console.log('message: ' + message);
-    comments2.insert({contents: message});
+    console.log('sockets: ' + sockets.length);
+    var mes = {contents: message};
+    comments2.insert(mes);
+    io.emit('receiveMessage', mes);
   });
 });
 http.listen(PORT_NUMBER, function(){
